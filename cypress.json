@@ -1,0 +1,11 @@
+{
+    "baseUrl": "https://serverest.dev",
+    "viewportWidth": 1280,
+	"viewportHeight": 720,
+    
+    
+    "env": {
+        "env": "teste",
+        "apiUrl": "https://serverest.dev"
+    }
+}

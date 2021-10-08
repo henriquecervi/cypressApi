@@ -10,7 +10,7 @@ beforeEach(() => {
 })
 
 describe("Login", () => {
-    it("Login on application", () => {
+    it("Log into application", () => {
         cy.request({
             method: "POST",
            // url: "https://serverest.dev/login",
@@ -38,7 +38,7 @@ describe("Login", () => {
             massaDados.login1.password)
     });
 
-    it("Include a product in store", () => {
+    it.skip("Include a product in store", () => {
         cy.request({
             method: 'POST',
             url: `${Cypress.env("apiUrl")}/produtos`,

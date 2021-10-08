@@ -21,3 +21,4 @@
 require('./commands')
 
 import './commands'
+cy.faker = require('faker');

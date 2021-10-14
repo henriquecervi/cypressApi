@@ -1,29 +1,34 @@
 /// <reference types="cypress" />
 
 let token
-let massaDados
+let bodyData
 
-beforeEach(() => {
-	cy.fixture("login.json").then(login => {
-		massaDados = login
-	})
+before(() => {
+	cy.generateFixture()
+        cy.fixture('users.json').then(users => {
+            bodyData = users
+        })        
 })
-
 describe("Login", () => {
     it("Log into application", () => {
+
+        cy.createUser(
+            bodyData.userData[0].nome,
+            bodyData.userData[0].email,
+            bodyData.userData[0].password,
+            bodyData.userData[0].administrador
+            )
+        
         cy.request({
             method: "POST",
-           // url: "https://serverest.dev/login",
             url: `${Cypress.env("apiUrl")}/login`,
             headers: {
                 accept: "application/json",
                 "content-type": "application/json"
             },
             body: {
-                "email": massaDados.login1.email,
-                "password": massaDados.login1.password
-                // "email": "henrique@teste.com.br",
-                // "password": "pwd123"
+                "email": bodyData.userData[0].email,
+                "password": bodyData.userData[0].password
             }
 
         }).should((response) => {
@@ -34,29 +39,10 @@ describe("Login", () => {
     })
 
     it('Login with Cypress Commands', () => {
-        cy.login(massaDados.login1.email,
-            massaDados.login1.password)
+        cy.login(bodyData.userData[0].email,
+            bodyData.userData[0].password)
+            .should((response => {
+                expect(response.status).to.eq(200)
+            }))
     });
-
-    it.skip("Include a product in store", () => {
-        cy.request({
-            method: 'POST',
-            url: `${Cypress.env("apiUrl")}/produtos`,
-            headers: { 
-                accept: "application/json",
-                "content-type": "application/json",
-                "Authorization": token
-            },
-            failOnStatusCode: false,
-            body: {                
-                    "nome": "Mouse Gamer Xpto2",
-                    "preco": 1447,
-                    "descricao": "Mouse",
-                    "quantidade": 5                  
-            }
-        }).should((response) => {
-            expect(response.status).to.eq(201)
-            expect(response.body.message).to.eq("Cadastro realizado com sucesso")
-        })
-    })
 })

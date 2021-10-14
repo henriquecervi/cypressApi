@@ -1,10 +1,11 @@
 /// <reference types="cypress" />
 
 let bodyData
+let testeNome
 
-describe('Create a User Test', () => {   
-    beforeEach(() => {       
-        cy.generateFixture('users')
+describe('Create a new user Test', () => {   
+    before(() => {       
+        cy.generateFixture()
         cy.fixture('users.json').then(users => {
             bodyData = users
         })
@@ -12,10 +13,11 @@ describe('Create a User Test', () => {
 
     it('Creating a new user', () => {
         cy.createUser( 
-            bodyData.dinamicData[1].nome,
-            bodyData.dinamicData[1].email,
-            bodyData.dinamicData[1].password,
-            bodyData.dinamicData[1].administrador
+   //         testeNome,
+            bodyData.userData[1].nome,
+            bodyData.userData[1].email,
+            bodyData.userData[1].password,
+            bodyData.userData[1].administrador
             )
     });
 });

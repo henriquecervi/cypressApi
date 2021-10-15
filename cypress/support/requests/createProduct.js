@@ -1,13 +1,18 @@
 Cypress.Commands.add("createProduct",
-(nome, preco, descricao, quantidade) => {    
+(token, nome, preco, descricao, quantidade) => {    
     cy.request({        
         method: 'POST',
         url: `${Cypress.env("apiUrl")}/produtos`,
         headers: { 
+            "Authorization": token,
             accept: "application/json",
-            "content-type": "application/json"
-        },   
-        failOnStatusCode: false,     
+            "content-type": "application/json",
+            
+        }, 
+        // authorization: {
+        //     "Authorization": responseToken
+        // }  ,
+        failOnStatusCode: false,
         body: {
             "nome": nome,
             "preco": preco,

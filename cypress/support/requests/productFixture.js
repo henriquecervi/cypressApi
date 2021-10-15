@@ -5,7 +5,7 @@ Cypress.Commands.add('productFixture', () => {
       'productData':Cypress._.times(2, () => {
         return  {
           'nome':`${faker.commerce.productName()}`,
-          'preco': `${faker.finance.amount(100, 5000, 2)}`,
+          'preco': `${faker.finance.amount(100, 5000, 0)}`,
           'descricao': `${faker.commerce.productDescription()}`,
           'quantidade': `${faker.datatype.number(20)}`        
         }

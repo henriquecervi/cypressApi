@@ -2,7 +2,7 @@
 
 let user
 let product
-let token
+var responseToken
 
 
 before(() => {
@@ -17,8 +17,8 @@ before(() => {
         })        
 })
 describe('Product Test', () => {
-    it("Include a product in store", () => {
 
+    before(() => {
         cy.createUser( 
             user.userData[0].nome,
             user.userData[0].email,
@@ -29,10 +29,12 @@ describe('Product Test', () => {
         cy.login(user.userData[0].email,
             user.userData[0].password)
             .should((response) => {
-                token = (response.body.authorization)
-            })            
+                responseToken = (response.body.authorization)                
+            }) 
+    })
+    it("Include a product in store", () => {                 
 
-        cy.createProduct(
+        cy.createProduct(responseToken,
             product.productData[0].nome,
             product.productData[0].preco,
             product.productData[0].descricao,

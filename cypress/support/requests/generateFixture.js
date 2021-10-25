@@ -7,7 +7,7 @@ Cypress.Commands.add('generateFixture', () => {
           'nome':`${faker.name.firstName()} ${faker.name.lastName()}`,
           'email': `${faker.internet.email()}`,
           'password': `${faker.internet.password()}`,
-          'administrador': `${faker.datatype.boolean(false)}`        
+          'administrador': "true" //`${faker.datatype.boolean(false)}`        
         }
       })
     })
